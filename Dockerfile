@@ -5,6 +5,7 @@ RUN gradle bootJar --no-daemon
 
 
 FROM openjdk:17-alpine3.14
+LABEL org.opencontainers.image.source="https://github.com/DataDog/vulnerable-java-application/"
 EXPOSE 8080
 RUN mkdir /app
 WORKDIR /app
