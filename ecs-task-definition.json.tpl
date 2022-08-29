@@ -3,6 +3,9 @@
     "essential": true,
     "image": "${app_ecr_url}",
     "name": "main",
+    "command": [
+      "sh -c \"export INSTANCE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); export DD_TRACE_AGENT_URL=http://$INSTANCE_IP:8126; java -javaagent:/app/dd-java-agent.jar -jar /app/spring-boot-application.jar\""
+    ],
     "portMappings": [
       {
         "containerPort": 8000,
