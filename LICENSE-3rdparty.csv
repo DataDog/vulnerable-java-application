@@ -1,0 +1,5 @@
+Component,Origin,License,Copyright
+Spring Boot,Maven,Apache-2.0,Pivotal, Inc.
+logback-classic,Maven,EPL-1.0,QOS.ch
+logstash-logback-encoder,Maven,Apache-2.0,https://github.com/logfellow
+lombok,Maven,Custom,The Project Lombok Authors
