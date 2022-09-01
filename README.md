@@ -4,6 +4,7 @@ This repository contains a sample application, the "Websites Tester Service", th
 
 > **Warning**
 > This application is purposely vulnerable and can trivially be hacked. Don't expose it to the Internet, and don't run it in a production environment.
+> Instead, you can run it locally on your machine, or in a cloud environment on a private VPC.
 
 ## Running
 
