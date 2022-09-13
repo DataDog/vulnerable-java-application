@@ -38,7 +38,7 @@ public class MainController {
   @RequestMapping(method=RequestMethod.POST, value="/test-website", consumes="application/json")
   public ResponseEntity<String> testWebsite(@RequestBody WebsiteTestRequest request) {
     log.info("Testing website " + request.url);
-    String result = websiteTestService.testWebsite(request.url);
+    String result = websiteTestService.testWebsite(request);
     return new ResponseEntity<>(result, HttpStatus.OK);
   }
 
