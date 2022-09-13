@@ -28,7 +28,9 @@ function submitRequest() {
     method: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({
-      'url': url
+      'url': url,
+      'customHeaderKey': document.getElementById('customHeaderKey').value || '',
+      'customHeaderValue': document.getElementById('customHeaderValue').value || ''
     }),
     success: updateOutput,
     error: handleError
