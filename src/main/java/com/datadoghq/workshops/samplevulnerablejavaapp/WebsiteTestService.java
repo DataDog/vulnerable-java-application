@@ -17,7 +17,9 @@ public class WebsiteTestService {
     public String testWebsite(WebsiteTestRequest request) {
         try {
             HttpHeaders headers = new HttpHeaders();
-            headers.set(request.customHeaderKey, request.customHeaderValue);
+            if (request.customHeaderKey != null && !request.customHeaderKey.isEmpty()) {
+                headers.set(request.customHeaderKey, request.customHeaderValue);
+            }
 
             HttpEntity<String> entity = new HttpEntity<>("", headers);
 
