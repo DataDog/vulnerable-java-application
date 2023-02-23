@@ -12,7 +12,7 @@ WORKDIR /app
 COPY --from=builder /home/gradle/src/build/libs/*.jar /app/spring-boot-application.jar
 
 # Install Datadog agent
-RUN wget -O dd-java-agent.jar https://github.com/DataDog/dd-trace-java/releases/download/v0.107.1/dd-java-agent-0.107.1.jar && \
+RUN wget -O dd-java-agent.jar https://github.com/DataDog/dd-trace-java/releases/download/v1.9.0/dd-java-agent-1.9.0.jar && \
     echo "def82a0031c73fcfc17dbbe0eec6bf2ead566572907b3300d42afe70937a642e  dd-java-agent.jar" > SHA256SUMS && \
     sha256sum -c SHA256SUMS
 
