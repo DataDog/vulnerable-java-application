@@ -6,7 +6,7 @@ This repository contains a sample application, the "Websites Tester Service", th
 > This application is purposely vulnerable and can trivially be hacked. Don't expose it to the Internet, and don't run it in a production environment.
 > Instead, you can run it locally on your machine, or in a cloud environment on a private VPC.
 
-## Running
+## Running locally
 
 1. Build the image locally, or use `ghcr.io/datadog/vulnerable-java-application`:
 2. Run:
@@ -16,6 +16,15 @@ docker run --rm -p 8000:8000 ghcr.io/datadog/vulnerable-java-application
 ```
 
 3. You can then access the web application at http://127.0.0.1:8000
+
+## Running on Kubernetes
+
+```
+kubectl run  vulnerable-application --port=8000 --expose=true --image ghcr.io/datadog/vulnerable-java-application
+kubectl port-forward pod/vulnerable-application 8000
+```
+
+You can then access the web application at http://127.0.0.1:8000
 
 ## Exploitation
 
