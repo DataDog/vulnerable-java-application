@@ -1,10 +1,10 @@
-FROM gradle:7.5.1-jdk17 AS builder
+FROM gradle:8.7.0-jdk21 AS builder
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle bootJar --no-daemon
 
 
-FROM openjdk:17-alpine3.14
+FROM amazoncorretto:21-alpine-jdk
 LABEL org.opencontainers.image.source="https://github.com/DataDog/vulnerable-java-application/"
 EXPOSE 8080
 RUN mkdir /app
