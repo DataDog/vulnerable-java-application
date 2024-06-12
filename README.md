@@ -41,4 +41,11 @@ You can then access the web application at http://127.0.0.1:8000
 3. Note that there is some level of input validation - entering `$(whoami)` returns `Invalid domain name: $(whoami) - don't try to hack us!`
 4. However, the validation is buggy - notice how you can start the input with a domain name, and execute and command in the container!
 
+### Local file read vulnerability
+
+1. Browse to http://127.0.0.1:8000/file.html
+2. Note how the input allows you to specify file names such as `/tmp/files/hello.txt` and read them
+3. Note that there is some level of input validation - entering `/etc/passwd` returns `You are not allowed to read /etc/passwd`
+4. However, the validation is buggy and vulnerable to path traversal. For instance, you can enter `/tmp/files/../../etc/passwd` to bypass the validation and read any file on the local filesystem.
+
 ![image](https://user-images.githubusercontent.com/136675/186954376-e3d82d03-7d9e-49b3-a106-6da080980dae.png)

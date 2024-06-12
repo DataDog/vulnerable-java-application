@@ -1,4 +1,4 @@
-package com.datadoghq.workshops.samplevulnerablejavaapp;
+package com.datadoghq.workshops.samplevulnerablejavaapp.service;
 
 import com.datadoghq.workshops.samplevulnerablejavaapp.exception.DomainTestException;
 import com.datadoghq.workshops.samplevulnerablejavaapp.exception.InvalidDomainException;
@@ -6,7 +6,6 @@ import com.datadoghq.workshops.samplevulnerablejavaapp.exception.UnableToTestDom
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

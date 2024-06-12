@@ -1,5 +1,6 @@
-package com.datadoghq.workshops.samplevulnerablejavaapp;
+package com.datadoghq.workshops.samplevulnerablejavaapp.service;
 
+import com.datadoghq.workshops.samplevulnerablejavaapp.http.WebsiteTestRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
