@@ -2,6 +2,14 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.5'
     id 'io.spring.dependency-management' version '1.1.4'
+    id "org.sonarqube" version "5.1.0.4882"
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "mahwishriazjamil_vulnerable-java-application_93d332d4-391c-4f73-af30-9dae196a280f"
+        property "sonar.projectName", "vulnerable-java-application"
+    }
 }
 
 group = 'com.datadoghq.workshops'
