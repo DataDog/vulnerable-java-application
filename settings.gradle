@@ -1,1 +1,2 @@
 rootProject.name = 'domain-tester-service'
+sonar.gradle.skipCompile=true
