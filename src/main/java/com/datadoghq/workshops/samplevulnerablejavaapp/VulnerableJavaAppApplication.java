@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SampleVulnerableJavaAppApplication {
+public class VulnerableJavaAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SampleVulnerableJavaAppApplication.class, args);
+		SpringApplication.run(VulnerableJavaAppApplication.class, args);
 	}
 
 }

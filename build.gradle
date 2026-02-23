@@ -1,7 +1,11 @@
 plugins {
     id 'java'
+    id 'maven-publish'
     id 'org.springframework.boot' version '3.2.5'
     id 'io.spring.dependency-management' version '1.1.4'
+
+    // Pin the plugin version (avoid 6.+ to prevent DSL surprises between patch releases)
+    id 'com.jfrog.artifactory' version '6.0.4'
 }
 
 group = 'com.datadoghq.workshops'
@@ -11,20 +15,74 @@ java {
     sourceCompatibility = '21'
 }
 
+// Pull credentials from ~/.gradle/gradle.properties OR env vars.
+// ~/.gradle/gradle.properties:
+//   artifactoryUser=will@wdbsec.co.uk
+//   artifactoryToken=XXXX
+def artUser = providers.gradleProperty("artifactoryUser")
+        .orElse(providers.environmentVariable("ARTIFACTORY_USER"))
+        .getOrNull()
+
+def artToken = providers.gradleProperty("artifactoryToken")
+        .orElse(providers.environmentVariable("ARTIFACTORY_TOKEN"))
+        .getOrNull()
+
 repositories {
-    mavenCentral()
+    // If you resolve dependencies from Artifactory, add it here.
+    maven {
+        url = uri("https://trialrydwjg.jfrog.io/artifactory/devsecops-gradle-dev")
+        credentials {
+            username = artUser
+            password = artToken
+        }
+    }
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    implementation 'net.logstash.logback:logstash-logback-encoder:7.2'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.2'
+
     compileOnly 'org.projectlombok:lombok:1.18.32'
     annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
-  useJUnitPlatform()
+    useJUnitPlatform()
+}
+
+/**
+ * Publication used by the Artifactory plugin when running ./gradlew artifactoryPublish
+ * This publishes the standard Java component (a "plain" jar + pom).
+ */
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+artifactory {
+    contextUrl = "https://trialrydwjg.jfrog.io/artifactory"
+
+    publish {
+        repository {
+            repoKey = 'devsecops-gradle-release-local'
+            username = artUser
+            password = artToken
+            // NOTE: do NOT set "maven = true" here in 6.x
+        }
+        defaults {
+            publications('mavenJava')
+            publishArtifacts = true
+            publishPom = true
+        }
+    }
+
+    // NOTE: No resolve/clientConfig block in this convention.
+    // Dependency resolution happens via the repositories{} block above.
 }
